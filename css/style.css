@@ -112,13 +112,42 @@ body{
     margin-top: 1%;
 }
 
+.warmup-entry{
+  width:70%;
+  margin:auto;
+  padding: 0px 5px;
+  position: relative;
+  border-left: 3px #466365 solid;
+  background: rgba(173, 203, 164, 0.2);
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.warmup-name{
+  font-size: 1.6vw;
+  padding-top: 5px;
+}
+
+.warmup-audio{
+  width: 90%;
+  font-size: 1.1vw;
+}
+
+.warmup-star{
+  position:absolute;
+  top: 0;
+  right: 5px;
+  font-size: 2vw;
+  margin: 0;
+}
+
 #signUpSection{
     display: block;
     /* text-align: center; */
     margin-top: 2%;
     margin-bottom: 2%;
 }
-  
+
 #signUpForm{
     /* padding: 2%; */
     /* margin: auto; */
@@ -173,7 +202,7 @@ body{
     margin: 2% auto;
     border: 1px #ADCBA4 solid;
     padding: 1% 0;
-    
+
 }
 
 #loginForm button {

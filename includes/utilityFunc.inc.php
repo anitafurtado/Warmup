@@ -103,3 +103,63 @@ function loginUser($conn, $username, $password) {
     exit();
   }
 }
+
+function getWarmups($conn, $sqlInput){
+  $sql = $sqlInput;
+  $statement = mysqli_stmt_init($conn);
+  if (!mysqli_stmt_prepare($statement, $sql)) {
+    exit();
+  }
+  mysqli_stmt_execute($statement);
+  $queryData = mysqli_stmt_get_result($statement);
+  if ($results = mysqli_fetch_all($queryData)) {
+    return $results;
+  } else {
+    exit();
+  }
+  mysqli_stmt_close($statement);
+}
+/*
+function getCommonWarmups($conn){
+  $sql = "SELECT * FROM warmups WHERE plays > 10;";
+  $statement = mysqli_stmt_init($conn);
+  if (!mysqli_stmt_prepare($statement, $sql)) {
+    header("location: ../commonwarmups.php?error=statementFailed");
+    exit();
+  }
+  mysqli_stmt_execute($statement);
+  $queryData = mysqli_stmt_get_result($statement);
+  if ($results = mysqli_fetch_all($queryData)) {
+    $_SESSION["commonWarmupsData"] = $results;
+    return $results;
+  } else {
+    header("location: ../commonwarmups.php?error=noData");
+    exit();
+  }
+  mysqli_stmt_close($statement);
+}
+*/
+
+function convertToBasicString($array){
+  $eachValue = [];
+  foreach($array as $a) {
+      $eachValue[] = implode(',', $a);
+  }
+  return implode(" | ", $eachValue);
+}
+
+function getAllData($conn){
+  $data = getWarmups($conn, "SELECT * FROM warmups");
+  $_SESSION["allData"] = $data;
+  return $data;
+}
+
+function sortByPlays($conn){
+  $data = getWarmups($conn, "SELECT * FROM warmups ORDER BY plays DESC");
+  $_SESSION["sortedPlaysData"] = $data;
+  return $data;
+  // usort($data, function($a, $b) {
+  //   return $a["plays"] <=> $b["plays"];
+  // });
+  // return $data;
+}
